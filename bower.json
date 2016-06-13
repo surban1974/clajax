@@ -1,0 +1,20 @@
+{
+  "name": "clajax",
+  "description": "Simple JavaScript library for AJAX processing",
+  "main": "js/clAjax.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "clajax",
+    "ajax"
+  ],
+  "license": "GPLv2",
+  "authors": [
+  	{ "name": "Svyatoslav Urbanovych" },
+  	{ "name": "Svyatoslav Urbanovych", "email": "svyatoslav.urbanovych@gmail.com" },
+  	{ "name": "Svyatoslav Urbanovych", "email": "svyatoslav.urbanovych@gmail.com", "homepage": "http://it.linkedin.com/pub/svyatoslav-urbanovych/2/241/754" }
+  ]
+}

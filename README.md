@@ -10,7 +10,9 @@ You can [download released versions of clAjax](https://sourceforge.net/projects/
 For Node.js developers, Knockout is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
 
 ##Examples
-You can find in [/examples](https://github.com/surban1974/clajax/tree/master/examples) folder
+You can find in [/examples](https://github.com/surban1974/clajax/tree/master/examples) folder, or as demo:
+ - [long pooling](http://classhidra-surban1974.rhcloud.com/pooling)
+ - [rest](http://classhidra-surban1974.rhcloud.com/restful)
 
 ##How to use
 ```javascript

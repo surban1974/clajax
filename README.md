@@ -3,7 +3,7 @@ clAjax
 
 Simple JavaScript library for AJAX processing
 
-##Download/Install clAjax
+##Download / Install clAjax
 
 You can [download released versions of clAjax](https://sourceforge.net/projects/clajax) from SourceForge.
 
@@ -164,7 +164,7 @@ clAjax
 	.setUrl('loongPooling?asyncInterrupt=false&tmp='+new Date().getTime())
 	.request('GET');
 ```
-- Method POST/PUT/DELETE
+- Method POST / PUT / DELETE
 ```javascript
 	new clajax({
 		target:document.getElementById('rest_canvas'),

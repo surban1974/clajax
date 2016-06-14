@@ -164,7 +164,7 @@ clAjax
 	.setUrl('loongPooling?asyncInterrupt=false&tmp='+new Date().getTime())
 	.request('GET');
 ```
-- Method POST / PUT / DELETE
+- Methods POST / PUT / DELETE
 ```javascript
 	new clajax({
 		target:document.getElementById('rest_canvas'),

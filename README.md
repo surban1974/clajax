@@ -10,7 +10,8 @@ You can [download released versions of clAjax](https://sourceforge.net/projects/
 For Node.js developers, Knockout is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
 
 ##How to use
-1. Deferred loading JavaScript/CSS
+
+Deferred loading JavaScript/CSS
 ```javascript
 new clajax()
 	.setSuccess(function(){			
@@ -30,8 +31,8 @@ new clajax({
 	.load('../js/bootstrap-native.js');
 ```
 
-2. Async request
-2.1. Method GET
+Async request
+- Method GET
 ```javascript
 new clajax()
 	.setUrl('../resource.html')

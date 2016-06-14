@@ -142,7 +142,7 @@ var clAjax =
 				return this;
 			}
 		},
-		url:'../rest.html'
+		url:'../rest.html'+document.getElementById('item.id').value
 	})
 	.instance()
 	.request('GET');
@@ -155,4 +155,38 @@ clAjax
 	.setUrl('loongPooling?asyncInterrupt=false&tmp='+new Date().getTime())
 	.request('GET');
 ```
-
+- Method POST/PUT/DELETE
+```javascript
+	new clajax({
+		target:document.getElementById('rest_canvas'),
+		url:'../rest.html',
+		json: {
+			'item':{
+				'id':document.getElementById('item.id').value,
+				'name':document.getElementById('item.name').value,
+				'surname':document.getElementById('item.surname').value,
+				'age':document.getElementById('item.age').value
+			}
+		},
+		acceptableStatus: 	[{status:-1}] //any status
+	}).request('POST');
+...	
+	new clajax({
+		target:document.getElementById('rest_canvas'),
+		url:'../rest.html',
+		json: {
+			'item':{
+				'name':document.getElementById('item.name').value,
+				'surname':document.getElementById('item.surname').value,
+				'age':document.getElementById('item.age').value
+			}
+		},
+		acceptableStatus: 	[{status:-1}] //any status
+	}).request('PUT');
+...
+	new clajax({
+		target:document.getElementById('rest_canvas'),
+		url:'../rest.html?id='+document.getElementById('item.id').value,
+		acceptableStatus: 	[{status:-1}] //any status
+	}).request('DELETE');
+```

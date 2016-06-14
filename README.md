@@ -9,7 +9,14 @@ You can [download released versions of clAjax](https://sourceforge.net/projects/
 
 For Node.js developers, Knockout is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
 
+##Examples
+You can find into /examples folder
+
 ##How to use
+```javascript
+	<!--  clAjax -->
+	<script src='s../js/clAjax.js'></script> 
+```
 
 Deferred loading JavaScript/CSS
 ```javascript

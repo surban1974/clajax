@@ -7,7 +7,7 @@ Simple JavaScript library for AJAX processing
 
 You can [download released versions of clAjax](https://sourceforge.net/projects/clajax) from SourceForge.
 
-For Node.js developers, Knockout is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
+For Node.js developers, clAjax is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
 
 ##Examples
 You can find into [/examples](https://github.com/surban1974/clajax/tree/master/examples) folder, or as demo:

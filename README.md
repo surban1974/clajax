@@ -17,7 +17,7 @@ You can find into [/examples](https://github.com/surban1974/clajax/tree/master/e
 ##How to use
 ```javascript
 	<!--  clAjax -->
-	<script src='s../js/clAjax.js'></script> 
+	<script src='../js/clAjax.js'></script> 
 ```
 
 Deferred loading JavaScript/CSS

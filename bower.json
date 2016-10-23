@@ -16,5 +16,6 @@
   	{ "name": "Svyatoslav Urbanovych" },
   	{ "name": "Svyatoslav Urbanovych", "email": "svyatoslav.urbanovych@gmail.com" },
   	{ "name": "Svyatoslav Urbanovych", "email": "svyatoslav.urbanovych@gmail.com", "homepage": "http://it.linkedin.com/pub/svyatoslav-urbanovych/2/241/754" }
-  ]
+  ],
+  "version": "1.0.4"
 }

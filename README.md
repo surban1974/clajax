@@ -1,5 +1,4 @@
 # clAjax
-=======
 
 Simple JavaScript library for AJAX processing
 

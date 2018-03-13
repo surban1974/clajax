@@ -1,20 +1,19 @@
-clAjax
-=======
+# clAjax
 
 Simple JavaScript library for AJAX processing
 
-##Download / Install clAjax
+## Download / Install clAjax
 
 You can [download released versions of clAjax](https://sourceforge.net/projects/clajax) from SourceForge.
 
 For Node.js developers, clAjax is also available from [npm](https://npmjs.org/) - just run `npm install clajax`.
 
-##Examples
+## Examples
 You can find into [/examples](https://github.com/surban1974/clajax/tree/master/examples) folder, or as demo:
- - [long pooling](http://classhidra-surban1974.rhcloud.com/pooling)
+ - [long polling](http://classhidra-surban1974.rhcloud.com/pooling)
  - [rest](http://classhidra-surban1974.rhcloud.com/restful)
 
-##How to use
+## How to use
 ```javascript
 	<!--  clAjax -->
 	<script src='../js/clAjax.js'></script> 
@@ -151,7 +150,7 @@ var clAjax =
 				return this;
 			}
 		},
-		url:'../rest.html'+document.getElementById('item.id').value
+		url:'../rest.html'
 	})
 	.instance()
 	.request('GET');
@@ -161,7 +160,7 @@ clAjax
 	.setResponseLength(0)
 	.setInterrupted(false)
 	.clone()
-	.setUrl('loongPooling?asyncInterrupt=false&tmp='+new Date().getTime())
+	.setUrl('longPolling?asyncInterrupt=false&tmp='+new Date().getTime())
 	.request('GET');
 ```
 - Methods POST / PUT / DELETE

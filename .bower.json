@@ -1,0 +1,41 @@
+{
+  "name": "clajax",
+  "description": "Simple JavaScript library for AJAX processing",
+  "main": "js/clAjax.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "clajax",
+    "ajax"
+  ],
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "Svyatoslav Urbanovych"
+    },
+    {
+      "name": "Svyatoslav Urbanovych",
+      "email": "svyatoslav.urbanovych@gmail.com"
+    },
+    {
+      "name": "Svyatoslav Urbanovych",
+      "email": "svyatoslav.urbanovych@gmail.com",
+      "homepage": "http://it.linkedin.com/pub/svyatoslav-urbanovych/2/241/754"
+    }
+  ],
+  "version": "1.0.5",
+  "homepage": "https://github.com/surban1974/clajax",
+  "_release": "1.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.5",
+    "commit": "f533153cc7783406e34bd68eadd1208188039dcc"
+  },
+  "_source": "https://github.com/surban1974/clajax.git",
+  "_target": "^1.0.5",
+  "_originalSource": "clajax",
+  "_direct": true
+}

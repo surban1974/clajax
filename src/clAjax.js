@@ -1,8 +1,8 @@
 /**
 * Name: clAjax.js
-* Version: 1.0.7
+* Version: 1.0.9
 * Creation date: (08/11/2016)
-* Last update: (13/03/2018)
+* Last update: (17/07/2018)
 * @author: Svyatoslav Urbanovych svyatoslav.urbanovych@gmail.com
 */
 (function(factory){
@@ -43,6 +43,7 @@
 		this.contentType = 			(prot)?prot.contentType:null;
 		this.progressWait = 		(prot)?prot.progressWait:null;
 		this.mimeType = 			(prot)?prot.mimeType:null;
+		this.enlargeServerStatus = 	(prot)?((prot.enlargeServerStatus)?prot.enlargeServerStatus:false):false;
 
 		this.start = 				(prot)?prot.start:null;
 
@@ -133,6 +134,7 @@
 				this.contentType=null;
 				this.progressWait=null;
 				this.mimeType=null;
+				this.enlargeServerStatus=false;
 
 				this.start=null;
 				this.success=null;
@@ -230,6 +232,11 @@
 				this.mimeType = _mimeType;
 				return this;
 			},
+			
+			setEnlargeServerStatus : function(_enlargeServerStatus){
+				this.enlargeServerStatus = _enlargeServerStatus;
+				return this;
+			},
 
 			setStart : function(_start){
 				this.start = _start;
@@ -245,7 +252,12 @@
 				this.ready = _ready;
 				return this;
 			},
-
+			
+			setReady : function(_ready){
+				this.ready = _ready;
+				return this;
+			},
+			
 			setFail : function(_fail){
 				this.fail = _fail;
 				return this;
@@ -370,9 +382,11 @@
 				.setContentType(this.contentType)
 				.setAsynchronous(this.asynchronous)
 				.setMimeType(this.mimeType)
+				.setEnlargeServerStatus(this.enlargeServerStatus)
 				.setStart(this.start)
 				.setSuccess(this.success)
 				.setRedy(this.ready)
+				.setReady(this.ready)
 				.setFail(this.fail)
 				.setError(this.error)
 				.setFinish(this.finish)
@@ -417,7 +431,11 @@
 					var e = document.createElement('script');
 
 					if(this.base64){
-						var parameters = this.getParametersAsUrl(null,this.url);
+						var parameters = null;
+						if(this.form)
+							parameters = this.getParametersAsUrl(this.form,this.url);
+						else
+							parameters = this.getParametersAsUrl(null,this.url);
 						if(this.url.indexOf('?')>-1)
 							e.src = this.url.substring(0,this.url.indexOf('?'))+parameters;
 						else
@@ -425,8 +443,8 @@
 					}else
 						e.src = this.url;
 
-					if(this.type && this.type!='')
-						e.type=this.type;
+					if(this.contentType && this.contentType!='')
+						e.type=this.contentType;
 					else
 						e.type='text/javascript';
 
@@ -481,8 +499,8 @@
 					}else
 						e.href = this.url;
 
-					if(this.type && this.type!='')
-						e.type=this.type;
+					if(this.contentType && this.contentType!='')
+						e.type=this.contentType;
 					else
 						e.type='text/css';
 
@@ -792,6 +810,19 @@
 
 					    		if (http_request.status == 200 ) {
 					    			statusAccepted = true;
+					    		}else if(	instance.enlargeServerStatus &&
+					    					instance.enlargeServerStatus==true && 
+					    					(	http_request.status == 200 ||
+					    						http_request.status == 201 ||
+					    						http_request.status == 400 ||
+					    						http_request.status == 401 ||
+					    						http_request.status == 404 ||
+					    						http_request.status == 405
+					    					)
+					    			){
+					    			statusAccepted = true;
+								}
+					    		if(statusAccepted){
 					    			if(instance.ready && instance.ready!='')
 				            			_fready = instance.ready;
 					    			if(instance.success && instance.success!='')
@@ -801,9 +832,9 @@
 					    			if(instance.finish && instance.finish!='')
 				            			_ffinish = instance.finish;
 					    			if(instance.error && instance.error!='')
-				            			_ferror = instance.error;
-
+				            			_ferror = instance.error;					    			
 					    		}
+					    		
 					    		if(_facceptableStatus && _facceptableStatus.length>0){
 
 					    		}else if(instance.acceptableStatus && instance.acceptableStatus.length>0){
@@ -1021,10 +1052,10 @@
 				if(!_url)
 					_url = this.url;
 
-			    var getstr = '?';
-			    if(_url.indexOf('?')>-1) getstr='&';
+				
+				var getstr = '';			    
 			    if(this.base64){
-			    	getstr+='$inputBase64=true&';
+			    	getstr='?$inputBase64=true&';
 			    	if(_url.indexOf('?')>-1){
 			        	var urlParameters=_url.substring(_url.indexOf('?')+1,_url.length);
 			        	if(urlParameters.length>0){
@@ -1036,6 +1067,9 @@
 			        		}
 			        	}
 			        }
+			    }else{
+			    	getstr = '?';
+				    if(_url.indexOf('?')>-1) getstr='&';
 			    }
 
 			    if(frm){
@@ -1248,7 +1282,6 @@
 			},
 
 			getParametersAsMpart : function(frm,_url) {
-
 				if(window.FormData){
 					if(!frm)
 						frm = this.form;

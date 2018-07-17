@@ -1,6 +1,6 @@
 /**
 * Name: clAjax.js
-* Version: 1.0.9
+* Version: 1.1.0
 * Creation date: (08/11/2016)
 * Last update: (17/07/2018)
 * @author: Svyatoslav Urbanovych svyatoslav.urbanovych@gmail.com
@@ -62,6 +62,7 @@
 		this.asScript = 			(prot)?((prot.asScript)?prot.asScript:false):false;
 		this.asCss = 				(prot)?((prot.asCss)?prot.asCss:false):false;
 		this.opened = 				(prot)?((prot.opened)?prot.opened:false):false;
+		this.compatibility =		(prot)?((prot.compatibility)?prot.compatibility:false):false;
 		this.http = 				null;
 
 		this.acceptableStatus = 	(prot)
@@ -151,6 +152,7 @@
 				this.asScript = false;
 				this.asCss = false;
 				this.opened = false;
+				this.compatibility = false;
 				this.acceptableStatus = [];
 				this.acceptableReadyState = [];
 				this.requestHeaders = [];
@@ -312,6 +314,11 @@
 				this.opened = _opened;
 				return this;
 			},
+			
+			setCompatibility : function(_compatibility){
+				this.compatibility = _compatibility;
+				return this;
+			},
 
 			setAcceptableStatus : function(_acceptableStatus){
 				this.acceptableStatus = _acceptableStatus;
@@ -398,6 +405,7 @@
 				.setAsScript(this.asScript)
 				.setAsCss(this.asCss)
 				.setOpened(this.opened)
+				.setCompatibility(this.compatibility)
 				.setAcceptableStatus(this.acceptableStatus)
 				.setAcceptableReadyState(this.acceptableReadyState)
 				.setRequestHeaders(this.requestHeaders)
@@ -833,6 +841,13 @@
 				            			_ffinish = instance.finish;
 					    			if(instance.error && instance.error!='')
 				            			_ferror = instance.error;					    			
+					    		}else{
+					    			if(instance.fail && instance.fail!='')
+				            			_ffail = instance.fail;
+					    			if(instance.finish && instance.finish!='')
+				            			_ffinish = instance.finish;
+					    			if(instance.error && instance.error!='')
+				            			_ferror = instance.error;
 					    		}
 					    		
 					    		if(_facceptableStatus && _facceptableStatus.length>0){
@@ -885,9 +900,15 @@
 						    		if(statusAccepted==true){
 						            	if(_fready){
 						            		if (typeof _fready === 'function') {
-						            			_fready(http_request,instance);
+						            			if(instance.compatibility)						            				
+						            				_fready(http_request,((instance.target)?instance.target.id:null));
+						            			else
+						            				_fready(http_request,instance);
 						            		}else{
-						            			eval(_fready + '(http_request,instance)');
+						            			if(instance.compatibility)
+						            				eval(_fready + '(http_request,((instance.target)?instance.target.id:null))');
+						            			else
+						            				eval(_fready + '(http_request,instance)');
 						            		}
 						            	}else{
 						            		if(instance.target)
@@ -895,17 +916,30 @@
 						            	}
 						            	if(_fsuccess){
 						            		if (typeof _fsuccess === 'function') {
-						            			_fsuccess(http_request,instance);
+						            			if(instance.compatibility)
+						            				_fsuccess(http_request,((instance.target)?instance.target.id:null));
+						            			else
+						            				_fsuccess(http_request,instance);
 						            		}
-						            		else
-						            			eval(_fsuccess + '(http_request,instance)');
+						            		else{
+						            			if(instance.compatibility)
+						            				eval(_fsuccess + '(http_request,((instance.target)?instance.target.id:null))');
+						            			else
+						            				eval(_fsuccess + '(http_request,instance)');
+						            		}
 						            	}
 						    		}else{
 						            	if(_ffail){
 						            		if (typeof _ffail === 'function') {
-						            			_ffail(http_request,instance);
+						            			if(instance.compatibility)
+						            				_ffail(http_request,((instance.target)?instance.target.id:null));
+						            			else
+						            				_ffail(http_request,instance);
 						            		}else{
-						            			eval(_ffail + '(http_request,instance)');
+						            			if(instance.compatibility)
+						            				eval(_ffail + '(http_request,((instance.target)?instance.target.id:null))');
+						            			else
+						            				eval(_ffail + '(http_request,instance)');
 						            		}
 						            	}
 						            }
@@ -913,7 +947,7 @@
 						    		instance.exception(e);
 						    		if(_ferror){
 					            		if (typeof _ferror === 'function') {
-					            			_ferror(http_request, e, e.toString() ,instance);
+					            			_ferror(http_request, e, e.toString(),instance);
 					            		}else{
 					            			eval(_ferror + '(http_request, e, e.toString(), instance)');
 					            		}
@@ -924,9 +958,15 @@
 
 						    	if(_ffinish){
 					        		if (typeof _ffinish === 'function') {
-					        			_ffinish(http_request,instance);
+					        			if(instance.compatibility)
+					        				_ffinish(http_request,((instance.target)?instance.target.id:null));
+					        			else
+					        				_ffinish(http_request,instance);
 					        		}else{
-					        			eval(_ffinish + '(http_request,instance)');
+					        			if(instance.compatibility)
+					        				eval(_ffinish + '(http_request,((instance.target)?instance.target.id:null))');
+					        			else
+					        				eval(_ffinish + '(http_request,instance)');
 					        		}
 					        	}
 
@@ -969,9 +1009,15 @@
 
 		    		http_request.ontimeout = function() {
 			        		if (typeof instance.timeout === 'function') {
-			        			instance.timeout(http_request,this);
+			        			if(instance.compatibility)
+			        				instance.timeout(http_request,this.target);
+			        			else
+			        				instance.timeout(http_request,instance);
 			        		}else{
-			        			eval(instance.timeout + '(http_request,this)');
+			        			if(instance.compatibility)
+			        				eval(instance.timeout + '(http_request,((instance.target)?instance.target.id:null))');
+			        			else	
+			        				eval(instance.timeout + '(http_request,instance)');
 			        		}
 		    		}
 	        	}

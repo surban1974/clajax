@@ -234,7 +234,7 @@
 				this.mimeType = _mimeType;
 				return this;
 			},
-			
+
 			setEnlargeServerStatus : function(_enlargeServerStatus){
 				this.enlargeServerStatus = _enlargeServerStatus;
 				return this;
@@ -254,12 +254,12 @@
 				this.ready = _ready;
 				return this;
 			},
-			
+
 			setReady : function(_ready){
 				this.ready = _ready;
 				return this;
 			},
-			
+
 			setFail : function(_fail){
 				this.fail = _fail;
 				return this;
@@ -314,7 +314,7 @@
 				this.opened = _opened;
 				return this;
 			},
-			
+
 			setCompatibility : function(_compatibility){
 				this.compatibility = _compatibility;
 				return this;
@@ -437,7 +437,6 @@
 				}
 				if(this.url && this.asScript){
 					var e = document.createElement('script');
-
 					if(this.base64){
 						var parameters = null;
 						if(this.form)
@@ -448,8 +447,15 @@
 							e.src = this.url.substring(0,this.url.indexOf('?'))+parameters;
 						else
 							e.src = this.url+parameters;
-					}else
-						e.src = this.url;
+					}else{
+						var parameters = null;
+						if(this.form)
+							parameters = this.getParametersAsUrl(this.form,this.url);
+						if(parameters)
+							e.src = this.url+parameters;
+						else
+							e.src = this.url;
+					}
 
 					if(this.contentType && this.contentType!='')
 						e.type=this.contentType;
@@ -500,10 +506,15 @@
 
 					if(this.base64){
 						var parameters = this.getParametersAsUrl(null,this.url);
-						if(href.indexOf('?')>-1)
-							e.href = this.url.substring(0,this.url.indexOf('?'))+parameters;
-						else
-							e.href = this.url+parameters;
+						if(parameters && parameters.length>0){
+							if(parameters.slice(-1)=='&')
+								parameters=parameters.slice(0, -1);
+							if(this.url.indexOf('?')>-1)
+								e.href = this.url.substring(0,this.url.indexOf('?'))+parameters;
+							else
+								e.href = this.url+parameters;
+						}else
+							e.href = this.url;
 					}else
 						e.href = this.url;
 
@@ -819,7 +830,7 @@
 					    		if (http_request.status == 200 ) {
 					    			statusAccepted = true;
 					    		}else if(	instance.enlargeServerStatus &&
-					    					instance.enlargeServerStatus==true && 
+					    					instance.enlargeServerStatus==true &&
 					    					(	http_request.status == 200 ||
 					    						http_request.status == 201 ||
 					    						http_request.status == 400 ||
@@ -840,7 +851,7 @@
 					    			if(instance.finish && instance.finish!='')
 				            			_ffinish = instance.finish;
 					    			if(instance.error && instance.error!='')
-				            			_ferror = instance.error;					    			
+				            			_ferror = instance.error;
 					    		}else{
 					    			if(instance.fail && instance.fail!='')
 				            			_ffail = instance.fail;
@@ -849,7 +860,7 @@
 					    			if(instance.error && instance.error!='')
 				            			_ferror = instance.error;
 					    		}
-					    		
+
 					    		if(_facceptableStatus && _facceptableStatus.length>0){
 
 					    		}else if(instance.acceptableStatus && instance.acceptableStatus.length>0){
@@ -900,7 +911,7 @@
 						    		if(statusAccepted==true){
 						            	if(_fready){
 						            		if (typeof _fready === 'function') {
-						            			if(instance.compatibility)						            				
+						            			if(instance.compatibility)
 						            				_fready(http_request,((instance.target)?instance.target.id:null));
 						            			else
 						            				_fready(http_request,instance);
@@ -1016,7 +1027,7 @@
 			        		}else{
 			        			if(instance.compatibility)
 			        				eval(instance.timeout + '(http_request,((instance.target)?instance.target.id:null))');
-			        			else	
+			        			else
 			        				eval(instance.timeout + '(http_request,instance)');
 			        		}
 		    		}
@@ -1098,8 +1109,8 @@
 				if(!_url)
 					_url = this.url;
 
-				
-				var getstr = '';			    
+
+				var getstr = '';
 			    if(this.base64){
 			    	getstr='?$inputBase64=true&';
 			    	if(_url.indexOf('?')>-1){
